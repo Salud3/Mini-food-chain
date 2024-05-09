@@ -8,7 +8,6 @@ public class Oveja : Animals
 {
     public GameObject objetive;
     public GameObject Pareja;
-    public NavMeshAgent agent;
     public bool comiendo;
     public override void DoDamage(float damage)
     {

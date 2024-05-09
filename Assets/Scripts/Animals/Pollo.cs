@@ -7,7 +7,6 @@ public class Pollo : Animals
 {
     public GameObject objetive;
     public GameObject Pareja;
-    public NavMeshAgent agent;
     public bool comiendo;
     public override void Beber(float sed)
     {
