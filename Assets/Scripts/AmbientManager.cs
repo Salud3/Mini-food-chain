@@ -1,71 +1,133 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class AmbientManager : MonoBehaviour
 {
     public static AmbientManager instance;
+    [Header("Animales Prefabs y Log system")]
+    public List<GameObject> Prefabs;
     public List<GameObject> pollos, ovejas, lobos, osos, aguilas, condor;
+    [Header("Zonas y comida Hervivoros")]
+    public GameObject[] zonas;
     public GameObject[] Pasto;
-    public GameObject Hongo;
+    public GameObject[] Agua;
+    public int sumatory;
 
     private void Awake()
     {
         instance = this;
     }
+
+    public void Start()
+    {
+        Spawn();
+    }
+
+    public void Spawn()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            int cant = Random.Range(5, 8);
+
+            for (int j = 0; j < cant; j++)
+            {
+                GameObject awa = Instantiate(Prefabs[i], zonas[i].transform.position, Quaternion.identity, null);
+                switch (i)
+                {
+                    case 0:
+                        pollos.Add(awa);
+                        break;
+                    case 1:
+                        ovejas.Add(awa);
+                        break;
+                    case 2:
+                        lobos.Add(awa);
+                        break;
+                    case 3:
+                        osos.Add(awa);
+                        break;
+                    case 4:
+                        aguilas.Add(awa);
+                        break;
+                    case 5:
+                        condor.Add(awa);
+                        break;
+                    case 6:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+        }
+    }
+
     public int IDGenerator()
     {
-        int sumatory = pollos.Count + ovejas.Count + lobos.Count + osos.Count + aguilas.Count + condor.Count;
-        return sumatory * Random.Range(0,16);
+
+        sumatory = pollos.Count + ovejas.Count + lobos.Count + osos.Count + aguilas.Count + condor.Count;
+        return sumatory * Random.Range(1,16);
     }
+
+    public GameObject BuscarAgua()
+    {
+        return Agua[Random.Range(0, Agua.Length)];
+    }
+    public GameObject BuscarPasto()
+    {
+        return Pasto[Random.Range(0, Pasto.Length)];
+    }
+
     public GameObject RabiaObjective()
     {
-        GameObject game = null;
+        GameObject temp = null;
         int seed = Random.Range(0,6);
         switch (seed)
         {
             case 0:
-                game = pollos[Random.Range(0, pollos.Count - 1)];
+                temp = pollos[Random.Range(0, pollos.Count - 1)];
                 break;
             case 1:
-                game = ovejas[Random.Range(0, ovejas.Count - 1)];
+                temp = ovejas[Random.Range(0, ovejas.Count - 1)];
                 break;
             case 2:
-                game = lobos[Random.Range(0, lobos.Count - 1)];
+                temp = lobos[Random.Range(0, lobos.Count - 1)];
                 break;
             case 3:
-                game = osos[Random.Range(0, osos.Count - 1)];
+                temp = osos[Random.Range(0, osos.Count - 1)];
                 break;
             default:
-                game = pollos[Random.Range(0, pollos.Count - 1)];
+                temp = pollos[Random.Range(0, pollos.Count - 1)];
                 break;
         }
-        return game;
+        return temp;
     }
 
     public GameObject Objetives(int clase)
     {
-        GameObject game = null;
+        GameObject temp = null;
         switch (clase)
         {
             case 0:
-                game = Pasto[Random.Range(1, Pasto.Length-1)];
+                temp = Pasto[Random.Range(1, Pasto.Length-1)];
                 break;
             case 1:
-                game = Pasto[Random.Range(1, Pasto.Length-1)];
+                temp = Pasto[Random.Range(1, Pasto.Length-1)];
                 break;
             case 2:
                 int rand = Random.Range(0, 3);
                 switch (rand)
                 {
                     case 0:
-                        game = ovejas[Random.Range(0, ovejas.Count - 1)];
+                        temp = ovejas[Random.Range(0, ovejas.Count - 1)];
                         break;
                     case 1:
-                        game = pollos[Random.Range(0, pollos.Count - 1)];
+                        temp = pollos[Random.Range(0, pollos.Count - 1)];
                         break;
                     default:
-                        game = ovejas[Random.Range(0, ovejas.Count - 1)];
+                        temp = ovejas[Random.Range(0, ovejas.Count - 1)];
                         break;
                 }
                 break;
@@ -75,17 +137,17 @@ public class AmbientManager : MonoBehaviour
                 {
                     case 0:
                         ran = Random.Range(0, lobos.Count - 1);
-                        game = lobos[ran];
+                        temp = lobos[ran];
                         
                         break;
                     case 1:
                         ran = Random.Range(0, aguilas.Count - 1);
-                        game = aguilas[ran];
+                        temp = aguilas[ran];
                         //if (game.GetComponent<Aguila>.vulnerable == false) game = Objectives(4);
                         break;
                     case 2:
                         ran = Random.Range(0, condor.Count - 1);
-                        game = condor[Random.Range(0, condor.Count - 1)];
+                        temp = condor[ran];
                         //if (game.GetComponent<Aguila>.vulnerable == false) game = Objectives(5);
 
                         break;
@@ -94,15 +156,155 @@ public class AmbientManager : MonoBehaviour
                 }
                 break;
             case 4:
-                game = osos[Random.Range(0, osos.Count - 1)];
+                ran = Random.Range(0, osos.Count - 1);
+                temp = osos[ran];
                 break;
             case 5:
-                game = condor[Random.Range(0, condor.Count - 1)];
+                ran = Random.Range(0, condor.Count - 1);
+                temp = condor[ran];
                 break;
             default:
-                game = pollos[Random.Range(0, pollos.Count - 1)];
+                ran = Random.Range(0, pollos.Count - 1);
+                temp = pollos[ran];
                 break;
         }
-        return game;
+        return temp;
     }
+    
+    //public List<GameObject> pollos, ovejas, lobos, osos, aguilas, condor;
+    public GameObject BuscarPareja(int id, int counter, Animals buscador)
+    {
+        GameObject temp = null;
+        if (counter > 2)
+        {
+            Debug.Log("No disponible");
+            return null;
+        }
+        else
+        {
+            counter++;
+        }
+        switch (id)
+        {
+            case 0://POLLO
+                temp = pollos[Random.Range(0, pollos.Count - 1)];
+
+                Pollo pollo = temp.GetComponent<Pollo>();
+                if (pollo.Pareja == null)//revisamos si no tiene pareja 
+                {
+                    pollo.Pareja = buscador.gameObject;
+                }
+                else//Si tiene pareja
+                {
+                    temp = BuscarPareja(id, counter, buscador);
+
+                }
+
+                break;
+            case 1://OVEJA
+                temp = ovejas[Random.Range(0, ovejas.Count - 1)];//buscamos la pareja
+                Oveja ovj_temp = temp.GetComponent<Oveja>();
+                if (ovj_temp != buscador && ovj_temp.Pareja == null)//revisamos si no tiene pareja 
+                {
+                    ovj_temp.Pareja = buscador.gameObject;
+                }
+                else//Si tiene pareja
+                {
+                    temp = BuscarPareja(id, counter,buscador);
+
+                }
+                break;
+            case 2://LOBO
+                temp = lobos[Random.Range(0, lobos.Count - 1)];
+                Lobo lobo = temp.GetComponent<Lobo>();
+                if (lobo.Pareja == null)
+                {
+                    lobo.Pareja= buscador.gameObject;
+                }
+                else
+                {
+                    temp = BuscarPareja(id , counter, buscador);
+                }
+                break;
+            case 3://OSO
+                temp = osos[Random.Range(0, osos.Count - 1)];
+                Oso oso = temp.GetComponent<Oso>();
+                if (oso.Pareja == null)
+                {
+                    oso.Pareja = buscador.gameObject;
+                }
+                else
+                {
+                    temp = BuscarPareja(id, counter, buscador);
+                }
+                break;
+            case 4://AGUILA
+                temp = aguilas[Random.Range(0, aguilas.Count - 1)];
+                Aguila aguila = temp.GetComponent<Aguila>();
+
+                if (aguila.Pareja == null)
+                {
+                    aguila.Pareja = buscador.gameObject;
+                }
+                else
+                {
+                    temp = BuscarPareja(id, counter,buscador);
+
+                }
+                break;
+            case 5://CONDOR
+                temp = condor[Random.Range(0, condor.Count - 1)];
+                Condor _condor = temp.GetComponent<Condor>();
+                if (_condor.Pareja == null)
+                {
+                    _condor.Pareja= buscador.gameObject;
+                }
+                else
+                {
+                    temp = BuscarPareja(id,counter,buscador);
+                }
+                break;
+            default:
+                temp = null;
+                Debug.LogWarning("id invalida");
+                break;
+        }
+        if (temp == null && counter>2)
+        {
+            Debug.LogWarning("Parejas Ocupadas");
+        }
+        return temp;
+    }
+
+    public void InitRepro(Animals a1, Animals a2, int id)
+    {
+        
+        GameObject a3 = Instantiate(Prefabs[id], a1.transform.position, Quaternion.identity);
+        a3.GetComponent<Oveja>().genes = a1.genes.Reproduce(a2.genes);
+
+        switch (id)
+        {
+            case 0:
+                break;
+            case 1:
+                ovejas.Add(a3);
+                a1.GetComponent<Oveja>().reproducido = true;
+                a1.transform.position += new Vector3(3, 0, 3);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }

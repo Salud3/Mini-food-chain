@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Water
   - Grass
+  - Animal
   layers:
   - Default
   - TransparentFX

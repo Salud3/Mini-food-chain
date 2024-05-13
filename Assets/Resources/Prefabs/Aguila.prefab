@@ -114,9 +114,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2418707121884384760}
+  - component: {fileID: 6519512846150692149}
+  - component: {fileID: -4128100070471623528}
+  - component: {fileID: -3815864900236294905}
   m_Layer: 0
   m_Name: Aguila
-  m_TagString: Untagged
+  m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,6 +146,82 @@ Transform:
   - {fileID: 7874181865032891947}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6519512846150692149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928840404066050764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573e0bb38f819384da4e7b305c797254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genes:
+    sedMax: 0
+    fuerza: 0
+    velocidad: 0
+    saciedadMax: 0
+    vidaMaxima: 0
+    prio: 0
+    sed: 0
+    vida: 0
+    saciedad: 0
+  tiempoVivo: 0
+  tiempoMuerto: 0
+  rabia: 0
+  vivo: 0
+  objetive: {fileID: 0}
+  Pareja: {fileID: 0}
+  comiendo: 0
+--- !u!114 &-4128100070471623528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928840404066050764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bc6d68dacab19469c22679f8168e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velMov: 0
+  velRot: 0
+  movement: 0
+  timeMov: 2
+  distance: 0
+  estado: 0
+  girar: 0
+  instintos: 0
+--- !u!54 &-3815864900236294905
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928840404066050764}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &3740011228250523696
 GameObject:
   m_ObjectHideFlags: 0

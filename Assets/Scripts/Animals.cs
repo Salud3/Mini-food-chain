@@ -3,16 +3,15 @@ using UnityEngine;
 public interface IAnimalBehaviour
 {
     abstract void Deshidratar(float sed);
-    abstract void DoDamage(float damage);
     abstract void GetDamage(float damage);
-    abstract void Comer(int comida);
+    abstract void Comer(float comida);
     abstract void Rabiar(bool rabiar);
     abstract void BuscarComida(Transform position);
-    abstract void BuscarPareja(Animals pareja);
+    abstract void BuscarPareja();
     abstract void Beber(float sed);//futura implementacion de veneno
     abstract void Hambre(float hambre);
 }
-public enum Prio { Agua = 0, Repro = 1, Huir = 2, Comer = 3 }
+public enum Prio { Agua = 0, Repro = 1, Huir = 2, Comer = 3, NONE =4 }
 
 
 public abstract class Animals : MonoBehaviour, IAnimalBehaviour
@@ -25,15 +24,14 @@ public abstract class Animals : MonoBehaviour, IAnimalBehaviour
     
 
     public Animals() { }
-    public abstract void DoDamage(float damage);
     public abstract void GetDamage(float damage);
     public abstract void Rabiar(bool rabiar);
     public abstract void Deshidratar(float sed);
     public abstract void BuscarComida(Transform position);
-    public abstract void BuscarPareja(Animals pareja);
+    public abstract void BuscarPareja();
     public abstract void Beber(float sed);            //if (veneno){Comenzar deterioro}
     public abstract void Hambre(float hambre);
-    public abstract void Comer(int hambre);
+    public abstract void Comer(float hambre);
      
 }
 [System.Serializable]
@@ -54,14 +52,14 @@ public class Gen
 
     public Gen(){ }
 
-    public Gen(int id)
+    public Gen(int id)//id no nescesario
     {
         sedMax = Random.Range(1, 50);
         velocidad = Random.Range(1, 50);
         fuerza = Random.Range(1, 50);
         saciedadMax = Random.Range(1, 50);
         vidaMaxima = Random.Range(1, 50);
-        prio = (Prio)Random.Range(0, 3);
+        prio = (Prio)Random.Range(0, 5);
     }
 
     public Gen(float _sedMax, float _velocidad, float _fuerza, float _saciedadMax, float _vidaMaxima, Prio _prio)

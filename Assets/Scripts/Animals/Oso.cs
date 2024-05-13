@@ -16,19 +16,15 @@ public class Oso : Animals
     {
     }
 
-    public override void BuscarPareja(Animals pareja)
+    public override void BuscarPareja()
     {
     }
 
-    public override void Comer(int hambre)
+    public override void Comer(float hambre)
     {
     }
 
     public override void Deshidratar(float sed)
-    {
-    }
-
-    public override void DoDamage(float damage)
     {
     }
 

@@ -115,9 +115,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4595550435741220729}
   - component: {fileID: 6250723903869790792}
+  - component: {fileID: 3749244992585752546}
+  - component: {fileID: 2441944986817706066}
   m_Layer: 0
   m_Name: Lobo
-  m_TagString: Untagged
+  m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,6 +169,53 @@ MonoBehaviour:
   objetive: {fileID: 0}
   Pareja: {fileID: 0}
   comiendo: 0
+--- !u!114 &3749244992585752546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096486403470151151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bc6d68dacab19469c22679f8168e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velMov: 0
+  velRot: 0
+  movement: 0
+  timeMov: 2
+  distance: 0
+  estado: 0
+  girar: 0
+  instintos: 0
+--- !u!54 &2441944986817706066
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096486403470151151}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &2396611499332023700
 GameObject:
   m_ObjectHideFlags: 0
