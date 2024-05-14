@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using UnityEditor.AnimatedValues;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class AmbientManager : MonoBehaviour
@@ -330,6 +332,10 @@ public class AmbientManager : MonoBehaviour
             default:
                 break;
         }
+
+        a1.genes.RePrio();
+        //a1..GetComponent<Movement>().estado = (States)Random.Range(0,3);
+        a2.genes.RePrio();
     }
 
 

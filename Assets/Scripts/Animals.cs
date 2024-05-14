@@ -61,7 +61,10 @@ public class Gen
         vidaMaxima = Random.Range(1, 50);
         prio = (Prio)Random.Range(0, 5);
     }
-
+    public void RePrio()
+    {
+        prio = (Prio)Random.Range(0, 5);
+    }
     public Gen(float _sedMax, float _velocidad, float _fuerza, float _saciedadMax, float _vidaMaxima, Prio _prio)
     {
         sedMax = _sedMax;

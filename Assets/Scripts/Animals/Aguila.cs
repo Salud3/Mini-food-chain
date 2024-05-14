@@ -47,6 +47,8 @@ public class Aguila : Animals
                     transform.rotation = new Quaternion(90, 0, 0, 0);
                     GetComponent<Rigidbody>().useGravity = true;
                     GetComponent<Movement>().enabled = false;
+                    GetComponent<Collider>().isTrigger = true;
+
                 }
             }
         }
@@ -56,7 +58,6 @@ public class Aguila : Animals
 
             if (tiempoMuerto > 120)
             {
-                GetComponent<Collider>().isTrigger = true;
                 Destroy(this.gameObject);
             }
         }
