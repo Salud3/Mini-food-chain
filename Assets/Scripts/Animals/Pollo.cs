@@ -193,7 +193,7 @@ public class Pollo : Animals
         return (stat * 100) / maxstat;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.transform.CompareTag("Water") && RegladeTres(genes.sed, genes.sedMax) < (genes.sedMax * .60f))
         {

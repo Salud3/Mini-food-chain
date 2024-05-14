@@ -9,7 +9,7 @@ public class Oveja : Animals
     public GameObject objetive; // A donde se dirije
     public GameObject Pareja;// variable para tener una pareja para reproducirse
     [Header("Requerimentos")]
-    public int id =1;//ID del tipo de animal
+    public int id = 1;//ID del tipo de animal
     public bool comiendo;//usado para comer o beber
     public bool reproducido;//ya se ha reproducido?
     public Vector3 crecimiento;//vector que crecera cada 15 segundos
@@ -188,7 +188,7 @@ public class Oveja : Animals
         return (stat * 100) / maxstat;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.transform.CompareTag("Water") && RegladeTres(genes.sed, genes.sedMax) < (genes.sedMax * .60f))
         {

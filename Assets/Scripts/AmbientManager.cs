@@ -7,7 +7,7 @@ public class AmbientManager : MonoBehaviour
 {
     public static AmbientManager instance;
     [Header("Animales Prefabs y Log system")]
-    public List<GameObject> Prefabs;
+    public List<GameObject> Prefabs = new List<GameObject>();
     public List<GameObject> pollos, ovejas, lobos, osos, aguilas, condor;
     [Header("Zonas y comida Hervivoros")]
     public GameObject[] zonas;
@@ -17,6 +17,13 @@ public class AmbientManager : MonoBehaviour
 
     private void Awake()
     {
+
+        pollos = new List<GameObject>();
+        ovejas = new List<GameObject>();
+        lobos = new List<GameObject>();
+        osos = new List<GameObject>();
+        aguilas = new List<GameObject>();
+        condor = new List<GameObject>();
         instance = this;
     }
 
@@ -31,9 +38,11 @@ public class AmbientManager : MonoBehaviour
         {
             int cant = Random.Range(5, 8);
 
-            for (int j = 0; j < cant; j++)
+            for (int j = 1; j < cant+1; j++)
             {
-                GameObject awa = Instantiate(Prefabs[i], zonas[i].transform.position, Quaternion.identity, null);
+                GameObject awa;
+                awa = Instantiate(Prefabs[i], zonas[i].transform.position, Quaternion.identity);
+
                 switch (i)
                 {
                     case 0:
@@ -280,26 +289,43 @@ public class AmbientManager : MonoBehaviour
     {
         
         GameObject a3 = Instantiate(Prefabs[id], a1.transform.position, Quaternion.identity);
-        a3.GetComponent<Oveja>().genes = a1.genes.Reproduce(a2.genes);
-
         switch (id)
         {
             case 0:
+                a3.GetComponent<Pollo>().genes = a1.genes.Reproduce(a2.genes);
+                pollos.Add(a3);
+                a1.GetComponent<Pollo>().reproducido = true;
+                a1.transform.position += new Vector3(3, 0, 3);
                 break;
             case 1:
+                a3.GetComponent<Oveja>().genes = a1.genes.Reproduce(a2.genes);
                 ovejas.Add(a3);
                 a1.GetComponent<Oveja>().reproducido = true;
                 a1.transform.position += new Vector3(3, 0, 3);
                 break;
             case 2:
+                a3.GetComponent<Lobo>().genes = a1.genes.Reproduce(a2.genes);
+                ovejas.Add(a3);
+                a1.GetComponent<Lobo>().reproducido = true;
+                a1.transform.position += new Vector3(3, 0, 3);
                 break;
             case 3:
+                a3.GetComponent<Oso>().genes = a1.genes.Reproduce(a2.genes);
+                ovejas.Add(a3);
+                a1.GetComponent<Oso>().reproducido = true;
+                a1.transform.position += new Vector3(3, 0, 3);
                 break;
             case 4:
+                a3.GetComponent<Aguila>().genes = a1.genes.Reproduce(a2.genes);
+                ovejas.Add(a3);
+                a1.GetComponent<Aguila>().reproducido = true;
+                a1.transform.position += new Vector3(3, 0, 3);
                 break;
             case 5:
-                break;
-            case 6:
+                a3.GetComponent<Condor>().genes = a1.genes.Reproduce(a2.genes);
+                ovejas.Add(a3);
+                a1.GetComponent<Condor>().reproducido = true;
+                a1.transform.position += new Vector3(3, 0, 3);
                 break;
             default:
                 break;

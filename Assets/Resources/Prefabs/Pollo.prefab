@@ -61,9 +61,14 @@ MonoBehaviour:
   tiempoMuerto: 0
   rabia: 0
   vivo: 0
+  movement: {fileID: 0}
   objetive: {fileID: 0}
   Pareja: {fileID: 0}
+  id: 0
   comiendo: 0
+  reproducido: 0
+  crecimiento: {x: 0, y: 0, z: 0}
+  timeAlive: 0
 --- !u!54 &-2497978730344977427
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,7 +115,8 @@ MonoBehaviour:
   distance: 0
   estado: 0
   girar: 0
-  controlD: 0
+  distanceRrepro: 0
+  instintos: 0
 --- !u!1 &6022196526839346234
 GameObject:
   m_ObjectHideFlags: 0
