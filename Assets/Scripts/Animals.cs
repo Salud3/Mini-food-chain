@@ -24,6 +24,7 @@ public abstract class Animals : MonoBehaviour, IAnimalBehaviour
     
 
     public Animals() { }
+    public abstract void GenAction();
     public abstract void GetDamage(float damage);
     public abstract void Rabiar(bool rabiar);
     public abstract void Deshidratar(float sed);

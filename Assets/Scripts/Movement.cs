@@ -36,19 +36,22 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
-        
         ColisionesAnimales();
+
         Movimiento();
         if (objetivo != null)
         {
             distance = Vector3.Distance(this.transform.position, objetivo.position);
         }
     }
+
     public void AssingObjetive( Transform transform)
     {
         objetivo = transform;
     }
+
     public bool distanceRrepro;
+
     void MovementToObjective(int cas)
     {
         var step = (velMov / 10) * Time.deltaTime;
@@ -70,11 +73,24 @@ public class Movement : MonoBehaviour
                 if (distance > 0.5)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, objetivo.transform.position, step);
+                    ataccando = false;
+                }
+                else
+                {
+                    ataccando = true;
                 }
             break; 
             default:
                 break;
         }
+    }
+    public bool ataccando;
+
+    void LookAtObjetive()
+    {
+        Vector3 direction = (objetivo.transform.position - transform.position);
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime *    velRot);
     }
     private void Movimiento()//Se mueve, gira o no hace nada
     {
@@ -96,6 +112,7 @@ public class Movement : MonoBehaviour
             //HUNGRY ES TENER HAMBRE PARA MOVERSE HACIA LA COMIDA
             case States.HUNGRY:
                 MovementToObjective(0);
+                LookAtObjetive();
                 break;
             case States.RUNNING:
                 transform.position += (transform.forward * (velMov / 5) * Time.deltaTime);//Movimiento default con velocidad extra
@@ -104,19 +121,25 @@ public class Movement : MonoBehaviour
             ///UNICAMENTE PARA DEPREDADORES NO HERVIVOROS
             case States.FINDING:
                 MovementToObjective(1);
+                LookAtObjetive();
+
+
                 break;
             //EATKING ES PARA BEBER Y COMER EN UN ESPACIO DETERMINADO
             case States.EATKING:
-                transform.position += (transform.forward * (velMov / 100) * Time.deltaTime);//Movimiento default superlento
+                transform.position += (transform.forward * (velMov / 20) * Time.deltaTime);//Movimiento default superlento
 
                 break;
             //REPRO ES CUANDO ESTAN MOVIENDOSE HACIA SU PAREJA
             case States.REPRO:
                 MovementToObjective(0);
+                LookAtObjetive();
                 break;
-            //ANYTHING ES PARA DEFINIR UN MOMENTO DE TRANQUILIDAD PERO NO ES IGUAL A NONE
+            //ANYTHING ES PARA DEFINIR UN MOVIMIENTO A UN OBJETIVO
             case States.ANYTHING:
                 Debug.Log("Reflexionando acerca de la vida...");
+                MovementToObjective(0);
+                LookAtObjetive();
                 break;
             default:
                 Debug.LogWarning(estado + "Error state movement");
@@ -140,7 +163,7 @@ public class Movement : MonoBehaviour
             {
                 Debug.Log("Impacto de frente");
                 girar = true;
-                velRot += 0.025f;
+                velRot *= 1.015f;
                 StartCoroutine(TiempoGirar());
             }
         }
@@ -151,7 +174,9 @@ public class Movement : MonoBehaviour
     }
 
     public bool instintos;
-    public void Accion()// desicion de girar, caminar y nada
+
+    // desicion de girar, caminar y nada
+    public void Accion()
     {
         if (velRot ==0 || velRot >20)
         {
@@ -176,7 +201,7 @@ public class Movement : MonoBehaviour
             case 1:
                 ChangeState(States.WALKING);
                 break;
-            case > 1 and <5:
+            case 2:
                 girar = true;
                 StartCoroutine(TiempoGirar());
                 break;
@@ -206,10 +231,8 @@ public class Movement : MonoBehaviour
 
     IEnumerator TiempoGirar()
     {
-        
         yield return new WaitForSeconds(2.5f);
         girar = false;
-
     }
 
 }

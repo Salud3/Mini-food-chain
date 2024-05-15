@@ -31,9 +31,72 @@ public class AmbientManager : MonoBehaviour
 
     public void Start()
     {
-        Spawn();
+        SpawnPollos(5);
+        SpawnOvejas(5);
+        SpawnLobos(5);
+        SpawnOso(3);
+        Aguilas(5);
+        SpawnCondor(2);
     }
+    public void SpawnPollos(int cant)
+    {
+        for (int i = 0; i < cant; i++)
+        {
+            GameObject awa;
+            awa = Instantiate(Prefabs[0], zonas[0].transform.position, Quaternion.identity);
+            pollos.Add(awa);
 
+        }
+    }
+    public void SpawnOvejas(int cant)
+    {
+        for (int i = 0; i < cant; i++)
+        {
+            GameObject awa;
+            awa = Instantiate(Prefabs[1], zonas[1].transform.position, Quaternion.identity);
+            ovejas.Add(awa);
+
+        }
+    }
+    public void SpawnLobos(int cant)
+    {
+        for (int i = 0; i < cant; i++)
+        {
+            GameObject awa;
+            awa = Instantiate(Prefabs[2], zonas[2].transform.position, Quaternion.identity);
+            lobos.Add(awa);
+
+        }
+    }
+    public void SpawnOso(int cant)
+    {
+        for (int i = 0; i < cant; i++)
+        {
+            GameObject awa;
+            awa = Instantiate(Prefabs[3], zonas[3].transform.position, Quaternion.identity);
+            osos.Add(awa);
+
+        }
+    }
+    public void Aguilas(int cant)
+    {
+        for (int i = 0; i < cant; i++)
+        {
+            GameObject Aguila;
+            Aguila = Instantiate(Prefabs[4], zonas[4].transform.position, Quaternion.identity);
+            aguilas.Add(Aguila);
+        }
+    }
+    public void SpawnCondor(int cant)
+    {
+        for (int i = 0; i < cant; i++)
+        {
+            GameObject awa;
+            awa = Instantiate(Prefabs[5], zonas[5].transform.position, Quaternion.identity);
+            condor.Add(awa);
+
+        }
+    }
     public void Spawn()
     {
         for (int i = 0; i < 7; i++)
@@ -132,10 +195,10 @@ public class AmbientManager : MonoBehaviour
                 switch (rand)
                 {
                     case 0:
-                        temp = ovejas[Random.Range(0, ovejas.Count - 1)];
+                        temp = pollos[Random.Range(0, pollos.Count - 1)];
                         break;
                     case 1:
-                        temp = pollos[Random.Range(0, pollos.Count - 1)];
+                        temp = ovejas[Random.Range(0, ovejas.Count - 1)];
                         break;
                     default:
                         temp = ovejas[Random.Range(0, ovejas.Count - 1)];
@@ -334,8 +397,9 @@ public class AmbientManager : MonoBehaviour
         }
 
         a1.genes.RePrio();
-        //a1..GetComponent<Movement>().estado = (States)Random.Range(0,3);
+        a1.GenAction();
         a2.genes.RePrio();
+        a2.GenAction();
     }
 
 
