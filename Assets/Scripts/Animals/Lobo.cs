@@ -425,6 +425,7 @@ public class Lobo : Animals
     }
     public override void GenAction()
     {
+        movement.instintos = false;
         movement.Accion();
     }
 

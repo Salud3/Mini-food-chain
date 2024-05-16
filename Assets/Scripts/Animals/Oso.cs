@@ -425,6 +425,7 @@ public class Oso : Animals
     }
     public override void GenAction()
     {
+        movement.instintos = false;
         movement.Accion();
     }
 

@@ -424,6 +424,7 @@ public class Condor : Animals
     }
     public override void GenAction()
     {
+        movement.instintos = false;
         movement.Accion();
     }
 

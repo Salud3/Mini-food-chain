@@ -391,6 +391,7 @@ public class Pollo : Animals
     }
     public override void GenAction()
     {
+        movement.instintos = false;
         movement.Accion();
     }
 

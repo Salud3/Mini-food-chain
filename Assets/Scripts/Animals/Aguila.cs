@@ -426,6 +426,7 @@ public class Aguila : Animals
     }
     public override void GenAction()
     {
+        movement.instintos = false;
         movement.Accion();
     }
 

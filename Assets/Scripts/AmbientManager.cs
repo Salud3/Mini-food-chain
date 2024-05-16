@@ -512,10 +512,8 @@ public class AmbientManager : MonoBehaviour
         }
 
         a1.genes.RePrio();
-        a1.GetComponent<Movement>().ChangeState(Movement.States.WALKING);
         a1.GenAction();
         a2.genes.RePrio();
-        a2.GetComponent<Movement>().ChangeState(Movement.States.WALKING);
         a2.GenAction();
     }
 
