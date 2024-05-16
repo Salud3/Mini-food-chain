@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8696154339513251220}
   - component: {fileID: 7060740549021284447}
   - component: {fileID: -1068077145296225603}
+  - component: {fileID: 2924002798025078726}
   m_Layer: 0
   m_Name: Oveja
   m_TagString: Animal
@@ -86,9 +87,11 @@ MonoBehaviour:
   movement: 0
   timeMov: 2
   distance: 0
+  objetivo: {fileID: 0}
   estado: 0
   girar: 0
   distanceRrepro: 0
+  ataccando: 0
   instintos: 0
 --- !u!54 &-1068077145296225603
 Rigidbody:
@@ -117,6 +120,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &2924002798025078726
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2280423957764419797}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8251132, y: 1.2122409, z: 2.6193275}
+  m_Center: {x: 0, y: -0.1306563, z: 0}
 --- !u!1 &2980404769770308543
 GameObject:
   m_ObjectHideFlags: 0

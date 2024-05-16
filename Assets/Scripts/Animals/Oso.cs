@@ -63,7 +63,7 @@ public class Oso : Animals
                     vivo = false;
                     transform.rotation = new Quaternion(90, 0, 0, 0);
                     GetComponent<Rigidbody>().useGravity = true;
-                    transform.GetComponentInChildren<Collider>().isTrigger = true;
+                    transform.GetComponent<Collider>().isTrigger = true;
                     GetComponent<Movement>().enabled = false;
                 }
             }
@@ -71,7 +71,7 @@ public class Oso : Animals
         else
         {
             tiempoMuerto += Time.deltaTime;
-            transform.GetComponentInChildren<Collider>().isTrigger = true;
+            transform.GetComponent<Collider>().isTrigger = true;
 
             if (tiempoMuerto > 60)
             {
@@ -446,6 +446,11 @@ public class Oso : Animals
             movement.ChangeState(Movement.States.EATKING);
             movement.instintos = true;
             Comer(0.5f / Time.fixedDeltaTime);
+        }
+
+        if (other.CompareTag("Wall"))
+        {
+            transform.Rotate(0, Time.deltaTime * 30, 0, Space.Self);
         }
     }
 

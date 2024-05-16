@@ -63,7 +63,7 @@ public class Aguila : Animals
                     vivo = false;
                     transform.rotation = new Quaternion(90, 0, 0, 0);
                     GetComponent<Rigidbody>().useGravity = true;
-                    transform.GetComponentInChildren<Collider>().isTrigger = true;
+                    transform.GetComponent<Collider>().isTrigger = true;
                     GetComponent<Movement>().enabled = false;
                 }
             }
@@ -72,7 +72,7 @@ public class Aguila : Animals
         {
             tiempoMuerto += Time.deltaTime;
 
-            transform.GetComponentInChildren<Collider>().isTrigger = true;
+            transform.GetComponent<Collider>().isTrigger = true;
             if (tiempoMuerto > 60)
             {
                 Destroy(this.gameObject);
@@ -447,6 +447,10 @@ public class Aguila : Animals
             movement.ChangeState(Movement.States.EATKING);
             movement.instintos = true;
             Comer(0.5f / Time.fixedDeltaTime);
+        }
+        if (other.CompareTag("Wall"))
+        {
+            transform.Rotate(0, Time.deltaTime * 30, 0, Space.Self);
         }
     }
 

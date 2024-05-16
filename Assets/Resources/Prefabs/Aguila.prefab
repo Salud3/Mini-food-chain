@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 6519512846150692149}
   - component: {fileID: -4128100070471623528}
   - component: {fileID: -3815864900236294905}
+  - component: {fileID: 8217578043767607952}
   m_Layer: 0
   m_Name: Aguila
   m_TagString: Animal
@@ -197,9 +198,11 @@ MonoBehaviour:
   movement: 0
   timeMov: 2
   distance: 0
+  objetivo: {fileID: 0}
   estado: 0
   girar: 0
   distanceRrepro: 0
+  ataccando: 0
   instintos: 0
 --- !u!54 &-3815864900236294905
 Rigidbody:
@@ -228,6 +231,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &8217578043767607952
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928840404066050764}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.18052, y: 0.83279455, z: 1.6908951}
+  m_Center: {x: 0, y: -0.08360273, z: 0}
 --- !u!1 &3740011228250523696
 GameObject:
   m_ObjectHideFlags: 0

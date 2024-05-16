@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 5290888115588972322}
   - component: {fileID: -6735137381694483508}
   - component: {fileID: 1352679795014266188}
+  - component: {fileID: 4415124656593221512}
   m_Layer: 0
   m_Name: Oso
   m_TagString: Animal
@@ -625,9 +626,11 @@ MonoBehaviour:
   movement: 0
   timeMov: 2
   distance: 0
+  objetivo: {fileID: 0}
   estado: 0
   girar: 0
   distanceRrepro: 0
+  ataccando: 0
   instintos: 0
 --- !u!54 &1352679795014266188
 Rigidbody:
@@ -656,3 +659,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &4415124656593221512
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7697374785098133722}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.3, y: 1.1427858, z: 2.5}
+  m_Center: {x: 0, y: -0.07139292, z: 0}

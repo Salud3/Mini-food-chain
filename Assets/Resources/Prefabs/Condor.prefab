@@ -852,6 +852,7 @@ GameObject:
   - component: {fileID: 25258303827546378}
   - component: {fileID: 2315019703566545926}
   - component: {fileID: -5150056318019744366}
+  - component: {fileID: 877727302214204030}
   m_Layer: 0
   m_Name: Condor
   m_TagString: Animal
@@ -916,6 +917,8 @@ MonoBehaviour:
   reproducido: 0
   crecimiento: {x: 0, y: 0, z: 0}
   timeAlive: 0
+  atacando: 0
+  delay: 0
 --- !u!114 &2315019703566545926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -933,9 +936,11 @@ MonoBehaviour:
   movement: 0
   timeMov: 2
   distance: 0
+  objetivo: {fileID: 0}
   estado: 0
   girar: 0
   distanceRrepro: 0
+  ataccando: 0
   instintos: 0
 --- !u!54 &-5150056318019744366
 Rigidbody:
@@ -964,3 +969,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &877727302214204030
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8793859172204112890}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.2327065, y: 0.93021536, z: 1.7170982}
+  m_Center: {x: 0, y: -0.03489226, z: 0}

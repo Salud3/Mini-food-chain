@@ -63,7 +63,7 @@ public class Pollo : Animals
                     vivo = false;
                     transform.rotation = new Quaternion(90, 0, 0, 0);
                     GetComponent<Rigidbody>().useGravity = true;
-                    transform.GetComponentInChildren<Collider>().isTrigger = true;
+                    transform.GetComponent<Collider>().isTrigger = true;
                     GetComponent<Movement>().enabled = false;
                 }
             }
@@ -71,7 +71,7 @@ public class Pollo : Animals
         else
         {
             tiempoMuerto += Time.deltaTime;
-            transform.GetComponentInChildren<Collider>().isTrigger = true;
+            transform.GetComponent<Collider>().isTrigger = true;
 
             if (tiempoMuerto > 60)
             {
@@ -401,24 +401,29 @@ public class Pollo : Animals
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.CompareTag("Water"))
+        if (other.CompareTag("Water"))
         {
             movement.ChangeState(Movement.States.EATKING);
             Beber(0.025f / Time.fixedDeltaTime);
         }
 
-        if (other.transform.CompareTag("Grass"))
+        if (other.CompareTag("Grass"))
         {
             movement.ChangeState(Movement.States.EATKING);
             movement.instintos = true;
             Comer(0.25f / Time.fixedDeltaTime);
         }
 
-        if (other.transform.CompareTag("Animal"))
+        if (other.CompareTag("Animal"))
         {
             movement.ChangeState(Movement.States.RUNNING);
             movement.instintos = true;
 
+        }
+
+        if (other.CompareTag("Wall"))
+        {
+            transform.Rotate(0, Time.deltaTime * 30, 0, Space.Self);
         }
 
     }

@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 6250723903869790792}
   - component: {fileID: 3749244992585752546}
   - component: {fileID: 2441944986817706066}
+  - component: {fileID: 6412037419007080386}
   m_Layer: 0
   m_Name: Lobo
   m_TagString: Animal
@@ -191,9 +192,11 @@ MonoBehaviour:
   movement: 0
   timeMov: 2
   distance: 0
+  objetivo: {fileID: 0}
   estado: 0
   girar: 0
   distanceRrepro: 0
+  ataccando: 0
   instintos: 0
 --- !u!54 &2441944986817706066
 Rigidbody:
@@ -222,6 +225,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &6412037419007080386
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096486403470151151}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.323379, y: 1.2904141, z: 2.1993048}
+  m_Center: {x: 0.0041537285, y: -0.14520708, z: -0.046333432}
 --- !u!1 &2396611499332023700
 GameObject:
   m_ObjectHideFlags: 0
