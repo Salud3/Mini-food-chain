@@ -97,46 +97,76 @@ public class AmbientManager : MonoBehaviour
 
         }
     }
-    public void Spawn()
+
+    public void CheckAnimals()
     {
-        for (int i = 0; i < 7; i++)
+        aguilas = new List<GameObject>();
+        Aguila[] agui = FindObjectsOfType<Aguila>();
+
+        for (int i = 0; i < agui.Length; i++)
         {
-            int cant = Random.Range(5, 8);
-
-            for (int j = 1; j < cant+1; j++)
+            if (agui[i].vivo)
             {
-                GameObject awa;
-                awa = Instantiate(Prefabs[i], zonas[i].transform.position, Quaternion.identity);
-
-                switch (i)
-                {
-                    case 0:
-                        pollos.Add(awa);
-                        break;
-                    case 1:
-                        ovejas.Add(awa);
-                        break;
-                    case 2:
-                        lobos.Add(awa);
-                        break;
-                    case 3:
-                        osos.Add(awa);
-                        break;
-                    case 4:
-                        aguilas.Add(awa);
-                        break;
-                    case 5:
-                        condor.Add(awa);
-                        break;
-                    case 6:
-                        break;
-                    default:
-                        break;
-                }
+                aguilas.Add(agui[i].gameObject);
             }
-            
         }
-    }
+
+        lobos = new List<GameObject>();
+        Lobo[] lob = FindObjectsOfType<Lobo>();
+
+        for (int i = 0; i < lob.Length; i++)
+        {
+            if (lob[i].vivo)
+            {
+                lobos.Add(lob[i].gameObject);
+            }
+        }
+
+        osos = new List<GameObject>();
+        Oso[] oso = FindObjectsOfType<Oso>();
+
+        for (int i = 0; i < oso.Length; i++)
+        {
+            if (oso[i].vivo)
+            {
+                osos.Add(oso[i].gameObject);
+            }
+        }
+
+        condor = new List<GameObject>();
+        Condor[] cond = FindObjectsOfType<Condor>();
+
+        for (int i = 0; i < cond.Length; i++)
+        {
+            if (cond[i].vivo)
+            {
+                condor.Add(cond[i].gameObject);
+            }
+        }
+
+        pollos = new List<GameObject>();
+        Pollo[] pol = FindObjectsOfType<Pollo>();
+
+        for (int i = 0; i < pol.Length; i++)
+        {
+            if (pol[i].vivo)
+            {
+                pollos.Add(pol[i].gameObject);
+            }
+        }
+
+        ovejas = new List<GameObject>();
+        Oveja[] ov = FindObjectsOfType<Oveja>();
+
+        for (int i = 0; i < ov.Length; i++)
+        {
+            if (ov[i].vivo)
+            {
+                ovejas.Add(ov[i].gameObject);
+            }
+        }
+        
+    } 
 
     public int IDGenerator()
     {
@@ -278,7 +308,7 @@ public class AmbientManager : MonoBehaviour
             case 1://OVEJA
                 temp = ovejas[Random.Range(0, ovejas.Count - 1)];//buscamos la pareja
                 Oveja ovj_temp = temp.GetComponent<Oveja>();
-                if (ovj_temp != buscador && ovj_temp.Pareja == null)//revisamos si no tiene pareja 
+                if (ovj_temp != buscador)//revisamos si no tiene pareja 
                 {
                     ovj_temp.Pareja = buscador.gameObject;
                 }
@@ -370,25 +400,25 @@ public class AmbientManager : MonoBehaviour
                 break;
             case 2:
                 a3.GetComponent<Lobo>().genes = a1.genes.Reproduce(a2.genes);
-                ovejas.Add(a3);
+                lobos.Add(a3);
                 a1.GetComponent<Lobo>().reproducido = true;
                 a1.transform.position += new Vector3(3, 0, 3);
                 break;
             case 3:
                 a3.GetComponent<Oso>().genes = a1.genes.Reproduce(a2.genes);
-                ovejas.Add(a3);
+                osos.Add(a3);
                 a1.GetComponent<Oso>().reproducido = true;
                 a1.transform.position += new Vector3(3, 0, 3);
                 break;
             case 4:
                 a3.GetComponent<Aguila>().genes = a1.genes.Reproduce(a2.genes);
-                ovejas.Add(a3);
+                aguilas.Add(a3);
                 a1.GetComponent<Aguila>().reproducido = true;
                 a1.transform.position += new Vector3(3, 0, 3);
                 break;
             case 5:
                 a3.GetComponent<Condor>().genes = a1.genes.Reproduce(a2.genes);
-                ovejas.Add(a3);
+                condor.Add(a3);
                 a1.GetComponent<Condor>().reproducido = true;
                 a1.transform.position += new Vector3(3, 0, 3);
                 break;

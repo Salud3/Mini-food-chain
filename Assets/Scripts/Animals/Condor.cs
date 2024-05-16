@@ -21,7 +21,7 @@ public class Condor : Animals
 
     private void Start()//inicializamos al animal
     {
-        timeAlive = Random.Range(350f, 500f);
+        timeAlive = Random.Range(150f, 600f);
 
         genes = new Gen(0);
 
@@ -63,6 +63,7 @@ public class Condor : Animals
                     vivo = false;
                     transform.rotation = new Quaternion(90, 0, 0, 0);
                     GetComponent<Rigidbody>().useGravity = true;
+                    transform.GetComponentInChildren<Collider>().isTrigger = true;
                     GetComponent<Movement>().enabled = false;
                 }
             }
@@ -70,10 +71,10 @@ public class Condor : Animals
         else
         {
             tiempoMuerto += Time.deltaTime;
+            transform.GetComponentInChildren<Collider>().isTrigger = true;
 
-            if (tiempoMuerto > 120)
+            if (tiempoMuerto > 60)
             {
-                GetComponent<Collider>().isTrigger = true;
                 Destroy(this.gameObject);
             }
         }
@@ -83,15 +84,25 @@ public class Condor : Animals
         atacar();
     }
 
-    bool atacando;
-    bool delay;
+    public bool atacando;
+    public bool delay;
     public void atacar()
     {
         if (atacando && !delay)
         {
-            objetive.GetComponent<Animals>().GetDamage(genes.fuerza);
-            delay = true;
-            StartCoroutine(DelayAttack());
+            if (objetive != null)
+            {
+                objetive.GetComponent<Animals>().GetDamage(genes.fuerza);
+                delay = true;
+                StartCoroutine(DelayAttack());
+            }
+            else
+            {
+                atacando = false;
+                ChangeState((Prio)Random.Range(0, 2));
+
+            }
+
         }
 
 
@@ -111,10 +122,8 @@ public class Condor : Animals
         }
 
         fuzzyLogic();
-        float GEB = (((genes.vida * timeAlive - 5) / genes.velocidad) / 2) * 0.15f;
-
-        Hambre(GEB);
-        Deshidratar(GEB);
+        Hambre(1);
+        Deshidratar(1);
 
         Invoke("Crecer", 15f);
     }
@@ -190,7 +199,7 @@ public class Condor : Animals
 
     public void Priochecked(float saciedad, float sed, float vida)
     {
-        if (priochange < 10)
+        if (priochange < 4)
         {
             if (genes.prio != Prio.Comer && saciedad < 55)
             {
@@ -276,6 +285,10 @@ public class Condor : Animals
                 {
                     movement.instintos = true;
                     BuscarComida(AmbientManager.instance.Objetives(id).transform);
+                    if (true)
+                    {
+
+                    }
                     movement.ChangeState(Movement.States.FINDING);
                 }
 
@@ -314,7 +327,7 @@ public class Condor : Animals
     {
         if (genes.sed < genes.sedMax)
         {
-            genes.saciedad += sed;
+            genes.sed += sed;
             if (genes.vida < genes.vidaMaxima)
             {
                 genes.vida += sed / 10;
@@ -366,6 +379,7 @@ public class Condor : Animals
 
     public override void BuscarComida(Transform position)//Buscar agua o Comida
     {
+        objetive = position.gameObject;
         movement.AssingObjetive(position);
     }
 

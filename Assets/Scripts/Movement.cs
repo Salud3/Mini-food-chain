@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
 
     public float distance;
 
-    Transform objetivo; //puede ser comida o presa
+    public Transform objetivo; //puede ser comida o presa
     [Header("Maquina de Estados")]
     public States estado;
 
@@ -88,9 +88,16 @@ public class Movement : MonoBehaviour
 
     void LookAtObjetive()
     {
-        Vector3 direction = (objetivo.transform.position - transform.position);
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime *    velRot);
+        if (objetivo != null)
+        {
+            Vector3 direction = (objetivo.transform.position - transform.position);
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime *    velRot);
+        }
+        else
+        {
+            ChangeState((States)Random.Range(0, 2));
+        }
     }
     private void Movimiento()//Se mueve, gira o no hace nada
     {
@@ -163,7 +170,6 @@ public class Movement : MonoBehaviour
             {
                 Debug.Log("Impacto de frente");
                 girar = true;
-                velRot *= 1.015f;
                 StartCoroutine(TiempoGirar());
             }
         }
@@ -178,7 +184,7 @@ public class Movement : MonoBehaviour
     // desicion de girar, caminar y nada
     public void Accion()
     {
-        if (velRot ==0 || velRot >20)
+        if (velRot ==0 || velRot >20 || velRot <-20)
         {
             AssingRotationSpeed();
         }
@@ -219,12 +225,12 @@ public class Movement : MonoBehaviour
     private void AssingRotationSpeed()
     {
         velRot = (Random.Range(-3.5f, 3.6f) * (velMov / 10));
-        if (velRot > 20)
+        if (velRot > 20 || velRot < -20)
         {
             velRot /= 1.5f;
         }else if(velRot > -2 && velRot < 2)
         {
-            velRot += 0.25f;
+            velRot = 5;
             velRot *= -1;
         }
     }

@@ -25,11 +25,12 @@ public class SaveSystem : MonoBehaviour
     {
         Instance = this;
         manager = FindFirstObjectByType<AmbientManager>();
-        //ReGenInfo();
+        ReGenInfo();
     }
     private void Start()
     {
         ReadInfo();
+        Invoke("Saveall", 1f);
     }
 
     public void ReadInfo()
@@ -51,6 +52,8 @@ public class SaveSystem : MonoBehaviour
 
     public void Saveall()
     {
+        //AmbientManager.instance.CheckAnimals();
+
         pollos  = manager.pollos.Count;
         ovejas  = manager.ovejas.Count;
         lobos   = manager.lobos.Count;
@@ -61,6 +64,8 @@ public class SaveSystem : MonoBehaviour
         DataLogSave();
 
         Debug.Log("Salvado");
+        Invoke("Saveall", 5f);
+
     }
 
 
