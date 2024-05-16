@@ -31,12 +31,12 @@ public class AmbientManager : MonoBehaviour
 
     public void Start()
     {
-        SpawnPollos(5);
-        SpawnOvejas(5);
-        SpawnLobos(5);
-        SpawnOso(3);
-        Aguilas(5);
-        SpawnCondor(2);
+        SpawnPollos(GameManager.Instance.cantPollos);
+        SpawnOvejas(GameManager.Instance.cantOveja);
+        SpawnLobos(GameManager.Instance.cantLobos);
+        SpawnOso(GameManager.Instance.cantOsos);
+        Aguilas(GameManager.Instance.cantAguilas);
+        SpawnCondor(GameManager.Instance.cantCondor);
     }
     public void SpawnPollos(int cant)
     {
@@ -236,7 +236,7 @@ public class AmbientManager : MonoBehaviour
                 }
                 break;
             case 3:
-                int ran = Random.Range(0, 3);
+                int ran = Random.Range(0, 5);
                 switch (ran)
                 {
                     case 0:
@@ -245,27 +245,69 @@ public class AmbientManager : MonoBehaviour
                         
                         break;
                     case 1:
-                        ran = Random.Range(0, aguilas.Count - 1);
-                        temp = aguilas[ran];
-                        //if (game.GetComponent<Aguila>.vulnerable == false) game = Objectives(4);
+                        ran = Random.Range(0, pollos.Count - 1);
+                        temp = pollos[ran];
                         break;
                     case 2:
-                        ran = Random.Range(0, condor.Count - 1);
-                        temp = condor[ran];
-                        //if (game.GetComponent<Aguila>.vulnerable == false) game = Objectives(5);
-
+                        ran = Random.Range(0, ovejas.Count - 1);
+                        temp = ovejas[ran];
                         break;
+                        /*case 1:
+                            ran = Random.Range(0, aguilas.Count - 1);
+                            temp = aguilas[ran];
+                            //if (game.GetComponent<Aguila>.vulnerable == false) game = Objectives(4);
+                            break;
+                        case 2:
+                            ran = Random.Range(0, condor.Count - 1);
+                            temp = condor[ran];
+                            //if (game.GetComponent<Aguila>.vulnerable == false) game = Objectives(5);
+                        break;
+                            */
                     default:
+                        ran = Random.Range(0, lobos.Count - 1);
+                        temp = lobos[ran];
                         break;
                 }
                 break;
             case 4:
-                ran = Random.Range(0, osos.Count - 1);
-                temp = osos[ran];
+                int ram = Random.Range(0, 5);
+                switch (ram)
+                {
+                    case 0:
+                        ran = Random.Range(0, lobos.Count - 1);
+                        temp = lobos[ran];
+                        break;
+                    case 1:
+                        ran = Random.Range(0, osos.Count - 1);
+                        temp = osos[ran];
+                        break;
+                    default:
+                        ran = Random.Range(0, osos.Count - 1);
+                        temp = osos[ran];
+                        break;
+                }
                 break;
             case 5:
-                ran = Random.Range(0, condor.Count - 1);
-                temp = condor[ran];
+                ran = Random.Range(0, 3);
+                switch (ran)
+                {
+                    case 0:
+                        ran = Random.Range(0, lobos.Count - 1);
+                        temp = lobos[ran];
+                        break;
+                    case 1:
+                        ran = Random.Range(0, osos.Count - 1);
+                        temp = osos[ran];
+                        break;
+                    case 2:
+                        ran = Random.Range(0, aguilas.Count - 1);
+                        temp = aguilas[ran];
+                        break;
+                    default:
+                        ran = Random.Range(0, condor.Count - 1);
+                        temp = condor[ran];
+                        break;
+                }
                 break;
             default:
                 ran = Random.Range(0, pollos.Count - 1);
@@ -293,10 +335,17 @@ public class AmbientManager : MonoBehaviour
             case 0://POLLO
                 temp = pollos[Random.Range(0, pollos.Count - 1)];
 
-                Pollo pollo = temp.GetComponent<Pollo>();
-                if (pollo.Pareja == null)//revisamos si no tiene pareja 
+                if (temp != null)
                 {
-                    pollo.Pareja = buscador.gameObject;
+                Pollo pollo = temp.GetComponent<Pollo>();
+                    if (pollo.Pareja == null && pollo != buscador)//revisamos si no tiene pareja 
+                    {
+                        pollo.Pareja = buscador.gameObject;
+                    }
+                    else//Si tiene pareja
+                    {
+                        temp = BuscarPareja(id, counter, buscador);
+                    }
                 }
                 else//Si tiene pareja
                 {
@@ -307,10 +356,18 @@ public class AmbientManager : MonoBehaviour
                 break;
             case 1://OVEJA
                 temp = ovejas[Random.Range(0, ovejas.Count - 1)];//buscamos la pareja
-                Oveja ovj_temp = temp.GetComponent<Oveja>();
-                if (ovj_temp != buscador)//revisamos si no tiene pareja 
+                if (temp != null )
                 {
-                    ovj_temp.Pareja = buscador.gameObject;
+                Oveja ovj_temp = temp.GetComponent<Oveja>();
+                    if (ovj_temp != buscador && ovj_temp.Pareja == null)//revisamos si no tiene pareja 
+                    {
+                        ovj_temp.Pareja = buscador.gameObject;
+                    }
+                    else//Si tiene pareja
+                    {
+                        temp = BuscarPareja(id, counter, buscador);
+
+                    }
                 }
                 else//Si tiene pareja
                 {
@@ -320,10 +377,18 @@ public class AmbientManager : MonoBehaviour
                 break;
             case 2://LOBO
                 temp = lobos[Random.Range(0, lobos.Count - 1)];
-                Lobo lobo = temp.GetComponent<Lobo>();
-                if (lobo.Pareja == null)
+                if (temp != null)
                 {
-                    lobo.Pareja= buscador.gameObject;
+                Lobo lobo = temp.GetComponent<Lobo>();
+                    if (lobo != buscador && lobo.Pareja == null)
+                    {
+                        lobo.Pareja = buscador.gameObject;
+                    }
+                    else//Si tiene pareja
+                    {
+                        temp = BuscarPareja(id, counter, buscador);
+
+                    }
                 }
                 else
                 {
@@ -332,10 +397,17 @@ public class AmbientManager : MonoBehaviour
                 break;
             case 3://OSO
                 temp = osos[Random.Range(0, osos.Count - 1)];
-                Oso oso = temp.GetComponent<Oso>();
-                if (oso.Pareja == null)
+                if (temp != null)
                 {
-                    oso.Pareja = buscador.gameObject;
+                Oso oso = temp.GetComponent<Oso>();
+                    if (oso.Pareja == null && oso != buscador)
+                    {
+                        oso.Pareja = buscador.gameObject;
+                    }
+                    else
+                    {
+                        temp = BuscarPareja(id, counter, buscador);
+                    }
                 }
                 else
                 {
@@ -344,28 +416,41 @@ public class AmbientManager : MonoBehaviour
                 break;
             case 4://AGUILA
                 temp = aguilas[Random.Range(0, aguilas.Count - 1)];
-                Aguila aguila = temp.GetComponent<Aguila>();
 
-                if (aguila.Pareja == null)
+                if (temp != null)
                 {
-                    aguila.Pareja = buscador.gameObject;
+                Aguila aguila = temp.GetComponent<Aguila>();
+                    if (aguila.Pareja == null && aguila != buscador)
+                    {
+                        aguila.Pareja = buscador.gameObject;
+                    }
+                    else
+                    {
+                        temp = BuscarPareja(id, counter, buscador);
+                    }
                 }
                 else
                 {
-                    temp = BuscarPareja(id, counter,buscador);
-
+                    temp = BuscarPareja(id, counter, buscador);
                 }
                 break;
             case 5://CONDOR
                 temp = condor[Random.Range(0, condor.Count - 1)];
-                Condor _condor = temp.GetComponent<Condor>();
-                if (_condor.Pareja == null)
+                if (temp != null)
                 {
-                    _condor.Pareja= buscador.gameObject;
+                Condor _condor = temp.GetComponent<Condor>();
+                    if (_condor.Pareja == null && _condor != buscador)
+                    {
+                        _condor.Pareja = buscador.gameObject;
+                    }
+                    else
+                    {
+                        temp = BuscarPareja(id, counter, buscador);
+                    }
                 }
                 else
                 {
-                    temp = BuscarPareja(id,counter,buscador);
+                    temp = BuscarPareja(id, counter, buscador);
                 }
                 break;
             default:

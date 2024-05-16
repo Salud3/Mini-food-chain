@@ -88,7 +88,14 @@ public class Oveja : Animals
         {
            transform.localScale += crecimiento;
         }
-        
+
+
+        int ran = Random.Range(0, 4);
+        if (ran == 1)
+        {
+            ChangeState((Prio)Random.Range(0, 3));
+        }
+
         fuzzyLogic();
 
         Hambre(1);
@@ -110,11 +117,11 @@ public class Oveja : Animals
 
                 if (fuzzySed < 15)
                 {
-                    CheckPrio();
+                    awa = true;
                 }
                 else if (fuzzySed > 75)
                 {
-                    awa = true;
+                    CheckPrio();
                 }
                 break;
             case Prio.Repro:
@@ -132,25 +139,25 @@ public class Oveja : Animals
             case Prio.Huir:
                 if (fuzzyvid < 85)
                 {
-                    CheckPrio();
+                    awa = true;
                 }
                 else if (fuzzyvid > 75)
                 {
-                    awa = true;
+                    CheckPrio();
                 }
                 break;
             case Prio.Comer:
                 if (fuzzySac < 15)
                 {
-                    CheckPrio();
+                    awa = true;
                 }
                 else if (fuzzySac > 75)
                 {
-                    awa = true;
+                    CheckPrio();
                 }
                 break;
             case Prio.NONE:
-                CheckPrio();
+                awa = true;
                 break;
             default:
                 break;
@@ -252,9 +259,17 @@ public class Oveja : Animals
                 
                 if (!movement.instintos)
                 {
-                    movement.instintos = true;
-                    BuscarComida(AmbientManager.instance.Objetives(0).transform);
-                    movement.ChangeState(Movement.States.HUNGRY);
+                    GameObject temp = AmbientManager.instance.Objetives(id);
+                    if (temp != null)
+                    {
+                        movement.instintos = true;
+                        BuscarComida(temp.transform);
+                        movement.ChangeState(Movement.States.FINDING);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("no disponible");
+                    }
                 }
 
                 break;

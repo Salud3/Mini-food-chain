@@ -60,19 +60,23 @@ public class Movement : MonoBehaviour
             case 0://Pareja o Comida hervivoros
                 if (distance > 3.5)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, objetivo.transform.position, step);
+                    Stepposition(step);
                 }
                 else
                 {
+                    if (estado == States.REPRO)
+                    {
                     transform.Rotate(Vector3.up * 5 * Time.deltaTime);
                     distanceRrepro = true;
+                    }
+
                 }
                 break;
             case 1://Depredadores
                 step = (velMov / 5) * Time.deltaTime;
-                if (distance > 0.5)
+                if (distance > 0.5 && estado == States.FINDING)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, objetivo.transform.position, step);
+                    Stepposition(step);
                     ataccando = false;
                 }
                 else
@@ -84,6 +88,20 @@ public class Movement : MonoBehaviour
                 break;
         }
     }
+
+    private void Stepposition(float step)
+    {
+        if(objetivo != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, objetivo.transform.position, step);
+        }
+        else
+        {
+            ChangeState((States)Random.Range(0, 3));
+        }
+
+    }
+
     public bool ataccando;
 
     void LookAtObjetive()
@@ -96,7 +114,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            ChangeState((States)Random.Range(0, 2));
+            ChangeState((States)Random.Range(0, 3));
         }
     }
     private void Movimiento()//Se mueve, gira o no hace nada
@@ -110,6 +128,7 @@ public class Movement : MonoBehaviour
         {
             //NONE ES PARA NO HACER NADA ES UN VOID ENTRE LAS DESICIONES
             case States.NONE:
+                ChangeState((States)Random.Range(1, 3));
                 break;
             //WALKING ES MOVERSE PA'LANTE
             case States.WALKING:

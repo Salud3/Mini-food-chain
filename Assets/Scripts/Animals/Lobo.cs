@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -92,9 +93,13 @@ public class Lobo : Animals
         {
             if (objetive != null)
             {
-            objetive.GetComponent<Animals>().GetDamage(genes.fuerza);
-            delay = true;
-            StartCoroutine(DelayAttack());
+                Animals temp = objetive.GetComponent<Animals>();
+                if (temp != null)
+                {
+                    temp.GetDamage(genes.fuerza);
+                    delay = true;
+                    StartCoroutine(DelayAttack());
+                }
             }
             else
             {
@@ -119,6 +124,13 @@ public class Lobo : Animals
         if (transform.localScale.x < 1 && vivo)
         {
             transform.localScale += crecimiento;
+        }
+
+
+        int ran = Random.Range(0, 4);
+        if (ran == 1)
+        {
+            ChangeState((Prio)Random.Range(0, 3));
         }
 
         fuzzyLogic();
@@ -283,9 +295,16 @@ public class Lobo : Animals
 
                 if (!movement.instintos)
                 {
-                    movement.instintos = true;
-                    BuscarComida(AmbientManager.instance.Objetives(id).transform);
-                    movement.ChangeState(Movement.States.FINDING);
+                    GameObject temp = AmbientManager.instance.Objetives(id);
+                    if(temp != null){
+                    movement.instintos = true;  
+                        BuscarComida(temp.transform);
+                        movement.ChangeState(Movement.States.FINDING);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("no disponible");
+                    }
                 }
 
                 break;

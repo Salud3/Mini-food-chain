@@ -52,7 +52,7 @@ public class SaveSystem : MonoBehaviour
 
     public void Saveall()
     {
-        //AmbientManager.instance.CheckAnimals();
+        AmbientManager.instance.CheckAnimals();
 
         pollos  = manager.pollos.Count;
         ovejas  = manager.ovejas.Count;

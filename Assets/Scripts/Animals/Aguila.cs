@@ -92,9 +92,13 @@ public class Aguila : Animals
         {
             if (objetive != null)
             {
-                objetive.GetComponent<Animals>().GetDamage(genes.fuerza);
-                delay = true;
-                StartCoroutine(DelayAttack());
+                Animals temp = objetive.GetComponent<Animals>();
+                if (temp != null)
+                {
+                    temp.GetDamage(genes.fuerza);
+                    delay = true;
+                    StartCoroutine(DelayAttack());
+                }
             }
             else
             {
@@ -120,6 +124,14 @@ public class Aguila : Animals
         {
             transform.localScale += crecimiento;
         }
+
+
+        int ran = Random.Range(0, 4);
+        if (ran == 1)
+        {
+            ChangeState((Prio)Random.Range(0, 3));
+        }
+
 
         fuzzyLogic();
         Hambre(1);
@@ -283,9 +295,17 @@ public class Aguila : Animals
 
                 if (!movement.instintos)
                 {
-                    movement.instintos = true;
-                    BuscarComida(AmbientManager.instance.Objetives(id).transform);
-                    movement.ChangeState(Movement.States.FINDING);
+                    GameObject temp = AmbientManager.instance.Objetives(id);
+                    if (temp != null)
+                    {
+                        movement.instintos = true;
+                        BuscarComida(temp.transform);
+                        movement.ChangeState(Movement.States.FINDING);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("no disponible");
+                    }
                 }
 
                 break;
